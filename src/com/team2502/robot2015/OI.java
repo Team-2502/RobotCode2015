@@ -3,8 +3,6 @@ package com.team2502.robot2015;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
-import com.team2502.robot2015.commands.ExampleCommand;
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -37,16 +35,10 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 
-	private static Joystick armStick;
 	private static Joystick driveStick;
 
 	public OI() {
-		armStick = new Joystick(RobotMap.LEFT_DRIVE);
-		driveStick = new Joystick(RobotMap.RIGHT_DRIVE);
-	}
-
-	public static Joystick getArmStick() {
-		return armStick;
+		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
 	}
 
 	public static Joystick getDriveStick() {

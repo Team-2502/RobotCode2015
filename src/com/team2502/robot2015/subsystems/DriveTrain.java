@@ -1,6 +1,7 @@
 package com.team2502.robot2015.subsystems;
 
 import com.team2502.robot2015.OI;
+import com.team2502.robot2015.RobotMap;
 import com.team2502.robot2015.commands.SlideDrive;
 
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -12,7 +13,7 @@ public class DriveTrain extends Subsystem {
 	private final RobotDrive drive;
 
 	private DriveTrain() {
-		drive = new RobotDrive(1, 2);
+		drive = new RobotDrive(RobotMap.LEFT_FRONT_DRIVE, RobotMap.LEFT_BACK_DRIVE, RobotMap.RIGHT_FRONT_DRIVE, RobotMap.RIGHT_BACK_DRIVE);
 	}
 
 	public static DriveTrain getInstance() {
