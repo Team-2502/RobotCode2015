@@ -9,6 +9,12 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
+	
+	public static final double WHEEL_DIAMETER = 5;
+	
+	public enum Motors {
+		LEFT_FRONT, LEFT_BACK, LEFT_SLIDE, RIGHT_FRONT, RIGHT_BACK, RIGHT_SLIDE
+	}
 
 	private static DriveTrain instance;
 	private final RobotDrive drive;
@@ -52,5 +58,32 @@ public class DriveTrain extends Subsystem {
 		drive.arcadeDrive(-OI.getDriveStick().getY(), -OI.getDriveStick().getZ(), true);
 		leftSlide.set(OI.getDriveStick().getX() * Math.abs(OI.getDriveStick().getX()));
 		rightSlide.set(OI.getDriveStick().getX() * Math.abs(OI.getDriveStick().getX()));
+	}
+	
+	public void moveMainDrive(double speed) {
+		moveMainDrive(speed, speed);
+	}
+	
+	public void moveMainDrive(double leftSpeed, double rightSpeed) {
+		drive.tankDrive(leftSpeed, rightSpeed);
+	}
+	
+	public double getEncoderValue(Motors motor) {
+		switch(motor) {
+		case LEFT_FRONT:
+			return leftFront.getPosition();
+		case LEFT_BACK:
+			return leftBack.getPosition();
+		case LEFT_SLIDE:
+			return leftSlide.getPosition();
+		case RIGHT_FRONT:
+			return rightFront.getPosition();
+		case RIGHT_BACK:
+			return rightBack.getPosition();
+		case RIGHT_SLIDE:
+			return rightSlide.getPosition();
+		default:
+			return Double.POSITIVE_INFINITY;
+		}
 	}
 }
