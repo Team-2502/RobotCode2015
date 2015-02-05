@@ -22,6 +22,7 @@ public class Robot extends IterativeRobot {
 //	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain driveTrain = DriveTrain.getInstance();
 	public static OI oi;
+	public static final Forklift forklift = Forklift.getInstance();
 
 //    Command autonomousCommand;
 
