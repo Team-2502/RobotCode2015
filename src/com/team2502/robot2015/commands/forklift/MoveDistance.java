@@ -1,5 +1,8 @@
 package com.team2502.robot2015.commands.forklift;
 
+import com.team2502.robot2015.Robot;
+import com.team2502.robot2015.subsystems.Forklift;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -37,7 +40,7 @@ public class MoveDistance extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	fl.stopAll();
+    	fl.stop();
     }
 
     // Called when another command which requires one or more of the same

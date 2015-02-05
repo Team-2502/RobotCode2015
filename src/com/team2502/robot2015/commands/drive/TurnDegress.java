@@ -1,5 +1,8 @@
 package com.team2502.robot2015.commands.drive;
 
+import com.team2502.robot2015.Robot;
+import com.team2502.robot2015.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,12 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TurnDegress extends Command {
 
-	private static double degrees;
-	private static double speed;
+	private double degrees;
+	private double speed;
+	private DriveTrain dt = Robot.driveTrain;
 	
     public TurnDegress() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -30,7 +35,7 @@ public class TurnDegress extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	dt.endAll();
+    	dt.stopAll();
     }
 
     // Called when another command which requires one or more of the same
