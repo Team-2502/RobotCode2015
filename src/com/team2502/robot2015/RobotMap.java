@@ -27,6 +27,7 @@ public class RobotMap {
 	public final static int RIGHT_BACK_DRIVE = 4;
 	public final static int RIGHT_SLIDE_DRIVE = 3;
 	
+	public final static int SCORPION_WINCH = -1;
 	
 	
 }
