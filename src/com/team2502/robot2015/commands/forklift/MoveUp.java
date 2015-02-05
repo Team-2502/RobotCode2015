@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveUp extends Command {
 
 	private double distance;
-	private double speed;
-	private double startDistance;
+	private double startHeight;
 	private Forklift fl = Robot.forklift;
 	
     public MoveUp() {
@@ -17,22 +16,21 @@ public class MoveUp extends Command {
         // eg. requires(chassis);
     	require(Robot.forklift);
     	this.distance = distance;
-    	this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	this.startDistance = fl.getHeight();
+    	this.startHeight = fl.getHeight();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	fl.move(speed);
+    	fl.move(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return fl.getHeight() - distance > startDistance;
+        return fl.getHeight() - distance > startHeight;
     }
 
     // Called once after isFinished returns true

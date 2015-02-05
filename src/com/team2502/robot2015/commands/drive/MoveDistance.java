@@ -18,6 +18,7 @@ public class MoveDistance extends Command {
 	private double speed;
 	private DriveTrain dt = Robot.driveTrain;
 	private ArrayList<Double> lastEncoderValues = new ArrayList<Double>();
+	private double movedDistance = 0;
 	
     public MoveDistance(double distance, double speed) {
         // Use requires() here to declare subsystem dependencies
@@ -54,12 +55,12 @@ public class MoveDistance extends Command {
     	for (int i = 1; i < encoderValues.size(); i++) {
     		
     		diff = encoderValues.get(i) - lastEncoderValues.get(i);
-    		if (diff < smallestDiff) smallestDiff = diff;
+    		if (Math.abs(diff) < Math.abs(smallestDiff)) smallestDiff = diff;
     	}
-    	
+    	movedDistance += smallestDiff;
     	lastEncoderValues = encoderValues;
     	
-    	return ((DriveTrain.WHEEL_DIAMETER * Math.PI) * diff) - distance > 0;
+    	return ((DriveTrain.WHEEL_DIAMETER * Math.PI) * movedDistance) - distance > 0;
         
     }
 
