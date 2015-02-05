@@ -17,6 +17,10 @@ public class Forklift extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    public void stop() {
+    	
+    }
+    
     public void close() {
     	setLeft(false);
     	setRight(false);
