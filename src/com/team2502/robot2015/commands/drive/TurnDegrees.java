@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TurnDegress extends Command {
+public class TurnDegrees extends Command {
 
 	private double degrees;
 	private double speed;
 	private DriveTrain dt = Robot.driveTrain;
 	
-    public TurnDegress() {
+    public TurnDegrees() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
