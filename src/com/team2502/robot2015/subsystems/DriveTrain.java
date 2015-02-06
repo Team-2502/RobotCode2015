@@ -49,9 +49,17 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void stopAll() {
-		drive.stopMotor();
+		stopMain();
+		stopSlide();
+	}
+	
+	public void stopSlide() {
 		leftSlide.set(0);
 		rightSlide.set(0);
+	}
+	
+	public void stopMain() {
+		drive.stopMotor();
 	}
 
 	public void slideDrive() {
