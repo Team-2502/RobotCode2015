@@ -68,6 +68,11 @@ public class DriveTrain extends Subsystem {
 		drive.tankDrive(leftSpeed, rightSpeed);
 	}
 	
+	public void moveSlide(double speed) {
+		leftSlide.set(speed);
+		rightSlide.set(speed);
+	}
+	
 	public double getEncoderValue(Motors motor) {
 		switch(motor) {
 		case LEFT_FRONT:
