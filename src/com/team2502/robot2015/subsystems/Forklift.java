@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -49,9 +50,28 @@ public class Forklift extends Subsystem {
     
     public void move(double speed) {
     	forkliftWinch.set(speed);
+    	updateForkliftDashboard();
     }
     
     public double getHeight() {
-    	return Double.POSITIVE_INFINITY;
+    	
+    	return (getSensorVoltage() / 10) * 6.5;
+//    	return Double.POSITIVE_INFINITY;
     }
+    
+    public double getSensorVoltage() {
+    	
+    	return sensor.getAverageVoltage();
+    }
+    
+    public void updateForkliftDashboard() {
+    	
+    	SmartDashboard.putNumber("Forlift Voltage", getSensorVoltage());
+    	SmartDashboard.putNumber("Forlift Height", getHeight());
+    	
+    	
+    	
+    }
+    
+    
 }
