@@ -45,12 +45,24 @@ public class Forklift extends Subsystem {
     	setLeft(true);
     }
     
+    public void setState(boolean open) {
+    	setLeft(open);
+    	setLeft(open);
+    }
+    	
+    
+    
     public void setLeft(boolean open) {
     	leftArm.set(open);
     }
     
     public void setRight(boolean open) {
     	rightArm.set(open);
+    }
+    
+    public boolean isOpen() {
+    	
+    	return leftArm.get();
     }
     
     public void move(double speed) {
