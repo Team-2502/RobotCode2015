@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
-	
+
 	public static final double WHEEL_DIAMETER = 5;
-	
+
 	public enum Motors {
 		LEFT_FRONT, LEFT_BACK, LEFT_SLIDE, RIGHT_FRONT, RIGHT_BACK, RIGHT_SLIDE
 	}
@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
 	private final CANTalon leftFront;
 	private final CANTalon leftBack;
 	private final CANTalon leftSlide;
-	
+
 	private final CANTalon rightFront;
 	private final CANTalon rightBack;
 	private final CANTalon rightSlide;
@@ -31,7 +31,7 @@ public class DriveTrain extends Subsystem {
 		leftFront = new CANTalon(RobotMap.LEFT_FRONT_DRIVE);
 		leftBack = new CANTalon(RobotMap.LEFT_BACK_DRIVE);
 		leftSlide = new CANTalon(RobotMap.LEFT_SLIDE_DRIVE);
-		
+
 		rightFront = new CANTalon(RobotMap.RIGHT_FRONT_DRIVE);
 		rightBack = new CANTalon(RobotMap.RIGHT_BACK_DRIVE);
 		rightSlide = new CANTalon(RobotMap.RIGHT_SLIDE_DRIVE);
@@ -48,42 +48,45 @@ public class DriveTrain extends Subsystem {
 	protected void initDefaultCommand() {
 		setDefaultCommand(new SlideDrive());
 	}
-	
+
 	public void stopAll() {
 		stopMain();
 		stopSlide();
 	}
-	
+
 	public void stopSlide() {
 		leftSlide.set(0);
 		rightSlide.set(0);
 	}
-	
+
 	public void stopMain() {
 		drive.stopMotor();
 	}
 
 	public void slideDrive() {
-		drive.arcadeDrive(-OI.getDriveStick().getY(), -OI.getDriveStick().getZ(), true);
-		leftSlide.set(OI.getDriveStick().getX() * Math.abs(OI.getDriveStick().getX()));
-		rightSlide.set(OI.getDriveStick().getX() * Math.abs(OI.getDriveStick().getX()));
+		drive.arcadeDrive(-OI.getDriveStick().getY(), -OI.getDriveStick()
+				.getZ(), true);
+		leftSlide.set(OI.getDriveStick().getX()
+				* Math.abs(OI.getDriveStick().getX()));
+		rightSlide.set(OI.getDriveStick().getX()
+				* Math.abs(OI.getDriveStick().getX()));
 	}
-	
+
 	public void moveMainDrive(double speed) {
 		moveMainDrive(speed, speed);
 	}
-	
+
 	public void moveMainDrive(double leftSpeed, double rightSpeed) {
 		drive.tankDrive(leftSpeed, rightSpeed);
 	}
-	
+
 	public void moveSlide(double speed) {
 		leftSlide.set(speed);
 		rightSlide.set(speed);
 	}
-	
+
 	public double getEncoderValue(Motors motor) {
-		switch(motor) {
+		switch (motor) {
 		case LEFT_FRONT:
 			return leftFront.getPosition();
 		case LEFT_BACK:
@@ -100,27 +103,21 @@ public class DriveTrain extends Subsystem {
 			return Double.POSITIVE_INFINITY;
 		}
 	}
-	
+
 	double[] movedDistance = new double[6];
-	
-public void updateDriveDashboard() {
-    	
-	
-	
-	int i = 0;
-	for (Motors m : Motors.values()) {
-		
-		double en = getEncoderValue(m);
-		movedDistance[i] += en;
-		double dist = ((WHEEL_DIAMETER * Math.PI) * movedDistance[i]);
-		
-		
-    	SmartDashboard.putNumber(m.toString(), movedDistance[i]);
-	i++;
+
+	public void updateDriveDashboard() {
+
+		int i = 0;
+		for (Motors m : Motors.values()) {
+
+			double en = getEncoderValue(m);
+			movedDistance[i] += en;
+			double dist = ((WHEEL_DIAMETER * Math.PI) * movedDistance[i]);
+
+			SmartDashboard.putNumber(m.toString(), movedDistance[i]);
+			i++;
+		}
+
 	}
-	
-    	
-    	
-    	
-    }
 }
