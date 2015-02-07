@@ -104,19 +104,14 @@ public class DriveTrain extends Subsystem {
 		}
 	}
 
-	double[] movedDistance = new double[6];
-
 	public void updateDriveDashboard() {
 
-		int i = 0;
 		for (Motors m : Motors.values()) {
 
 			double en = getEncoderValue(m);
-			movedDistance[i] += en;
-			double dist = ((WHEEL_DIAMETER * Math.PI) * movedDistance[i]);
+			double dist = ((WHEEL_DIAMETER * Math.PI) * en);
 
-			SmartDashboard.putNumber(m.toString(), movedDistance[i]);
-			i++;
+			SmartDashboard.putNumber(m.toString(), dist);
 		}
 
 	}
