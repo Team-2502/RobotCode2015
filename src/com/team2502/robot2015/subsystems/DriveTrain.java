@@ -36,6 +36,14 @@ public class DriveTrain extends Subsystem {
 		rightBack = new CANTalon(RobotMap.RIGHT_BACK_DRIVE);
 		rightSlide = new CANTalon(RobotMap.RIGHT_SLIDE_DRIVE);
 		drive = new RobotDrive(leftFront, leftBack, rightFront, rightBack);
+		
+		leftFront.setPosition(0);
+		leftBack.setPosition(0);
+		leftSlide.setPosition(0);
+		
+		rightFront.setPosition(0);
+		rightBack.setPosition(0);
+		rightSlide.setPosition(0);
 	}
 
 	public static DriveTrain getInstance() {
@@ -111,7 +119,9 @@ public class DriveTrain extends Subsystem {
 			double en = getEncoderValue(m);
 			double dist = ((WHEEL_DIAMETER * Math.PI) * en);
 
-			SmartDashboard.putNumber(m.toString(), dist);
+			SmartDashboard.putNumber(m.toString() + " Distance", dist);
+			SmartDashboard.putNumber(m.toString() + " Encoder", en);
+			
 		}
 
 	}
