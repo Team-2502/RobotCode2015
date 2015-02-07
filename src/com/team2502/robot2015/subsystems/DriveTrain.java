@@ -7,6 +7,7 @@ import com.team2502.robot2015.commands.SlideDrive;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
 	
@@ -99,4 +100,27 @@ public class DriveTrain extends Subsystem {
 			return Double.POSITIVE_INFINITY;
 		}
 	}
+	
+	double[] movedDistance = new double[6];
+	
+public void updateDriveDashboard() {
+    	
+	
+	
+	int i = 0;
+	for (Motors m : Motors.values()) {
+		
+		double en = getEncoderValue(m);
+		movedDistance[i] += en;
+		double dist = ((WHEEL_DIAMETER * Math.PI) * movedDistance[i]);
+		
+		
+    	SmartDashboard.putNumber(m.toString(), movedDistance[i]);
+	i++;
+	}
+	
+    	
+    	
+    	
+    }
 }

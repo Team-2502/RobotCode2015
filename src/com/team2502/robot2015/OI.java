@@ -36,13 +36,21 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 
 	private static Joystick driveStick;
+	private static Joystick liftStick;
 
 	public OI() {
 		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
+		liftStick = new Joystick(RobotMap.LEFT_JOYSTICK);
 	}
 
 	public static Joystick getDriveStick() {
 		return driveStick;
+	}
+	
+	public static Joystick getLiftStick() {
+		
+		return liftStick;
+		
 	}
 }
 
