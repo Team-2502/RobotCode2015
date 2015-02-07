@@ -50,7 +50,7 @@ public class Forklift extends Subsystem {
     
     public void move(double speed) {
     	forkliftWinch.set(speed);
-    	updateForkliftDashboard();
+//    	updateForkliftDashboard();
     }
     
     public double getHeight() {
