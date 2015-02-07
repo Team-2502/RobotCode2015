@@ -27,7 +27,7 @@ public class Forklift extends Subsystem {
     }
     
     public void stop() {
-    	forkliftWinch.stopMotor();
+    	forkliftWinch.set(0);
     }
     
     public void close() {
