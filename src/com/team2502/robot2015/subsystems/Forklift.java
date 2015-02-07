@@ -66,7 +66,7 @@ public class Forklift extends Subsystem {
     
     public double getHeight() {
     	
-    	return 6 - ((getSensorVoltage() / 5) * 5 + 1);
+    	return 61 - (getSensorVoltage() * 10);
 //    	return Double.POSITIVE_INFINITY;
     }
     
