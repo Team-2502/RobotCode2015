@@ -78,7 +78,7 @@ public class Forklift extends Subsystem {
     
     public double getHeight() {
     	
-    	return 61 - (getSensorVoltage() * 10);
+    	return 60 - (getSensorVoltage() * 10.1);
 //    	return Double.POSITIVE_INFINITY;
     }
     
@@ -89,8 +89,8 @@ public class Forklift extends Subsystem {
     
     public void updateForkliftDashboard() {
     	
-    	SmartDashboard.putNumber("Forlift Voltage", getSensorVoltage());
-    	SmartDashboard.putNumber("Forlift Height", getHeight());
+    	SmartDashboard.putNumber("Forklift Voltage", getSensorVoltage());
+    	SmartDashboard.putNumber("Forklift Height", getHeight());
     	
     	
     	
