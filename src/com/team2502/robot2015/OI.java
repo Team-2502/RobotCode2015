@@ -1,7 +1,10 @@
 package com.team2502.robot2015;
 
+import com.team2502.robot2015.commands.forklift.ToggleForklift;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -37,10 +40,13 @@ public class OI {
 
 	private static Joystick driveStick;
 	private static Joystick liftStick;
+	private static Button forkliftButton;
 
 	public OI() {
 		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
 		liftStick = new Joystick(RobotMap.LEFT_JOYSTICK);
+		forkliftButton = new JoystickButton(liftStick, 1);
+		forkliftButton.whenPressed(new ToggleForklift());
 	}
 
 	public static Joystick getDriveStick() {
