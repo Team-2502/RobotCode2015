@@ -1,11 +1,14 @@
 
 package com.team2502.robot2015;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
 import com.team2502.robot2015.commands.ExampleCommand;
 import com.team2502.robot2015.subsystems.DriveTrain;
 import com.team2502.robot2015.subsystems.ExampleSubsystem;
@@ -24,6 +27,9 @@ public class Robot extends IterativeRobot {
 	public static final DriveTrain driveTrain = DriveTrain.getInstance();
 	public static OI oi;
 	public static final Forklift forklift = new Forklift();
+	
+	private Image frame;
+	private int cameraSession;
 
 //    Command autonomousCommand;
 
@@ -33,12 +39,18 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		
+        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+        cameraSession = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(cameraSession);
+        NIVision.IMAQdxStartAcquisition(cameraSession);
         // instantiate the command used for the autonomous period
 //        autonomousCommand = new ExampleCommand();
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+        updateCamera();
 	}
 
     public void autonomousInit() {
@@ -51,6 +63,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        updateCamera();
     }
 
     public void teleopInit() {
@@ -73,9 +86,10 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	Scheduler.getInstance().run();
-    	forklift.updateForkliftDashboard();
-    	driveTrain.updateDriveDashboard();
+        Scheduler.getInstance().run();
+        updateCamera();
+        forklift.updateForkliftDashboard();
+        driveTrain.updateDriveDashboard();
     }
     
     /**
@@ -83,5 +97,11 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+        updateCamera();
+    }
+    
+    private void updateCamera() {
+        NIVision.IMAQdxGrab(cameraSession, frame, 1);
+        CameraServer.getInstance().setImage(frame);
     }
 }
