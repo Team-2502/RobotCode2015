@@ -72,7 +72,7 @@ public class Forklift extends Subsystem {
     
     public void moveLift() {
     	
-    	forkliftWinch.set(OI.getLiftStick().getY());
+    	forkliftWinch.set(OI.getLiftStick().getY() * ((OI.getLiftStick().getThrottle() > 0) ? 1 : -1));
     	
     }
     
