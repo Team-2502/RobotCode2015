@@ -24,7 +24,8 @@ public class Forklift extends Subsystem {
 	private final Solenoid leftArm = new Solenoid(RobotMap.FORKLIFT_SOLENOID_LEFT);
 	private final Solenoid rightArm = new Solenoid(RobotMap.FORKLIFT_SOLENOID_RIGHT);
 	private final AnalogInput sensor = new AnalogInput(RobotMap.FORKLIFT_SENSOR);
-
+	private static int forkliftDirection = 1;
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -72,7 +73,7 @@ public class Forklift extends Subsystem {
     
     public void moveLift() {
     	
-    	forkliftWinch.set(OI.getLiftStick().getY() * ((OI.getLiftStick().getThrottle() > 0) ? 1 : -1));
+    	forkliftWinch.set(OI.getLiftStick().getY() * forkliftDirection);
     	
     }
     
@@ -85,6 +86,11 @@ public class Forklift extends Subsystem {
     public double getSensorVoltage() {
     	
     	return sensor.getAverageVoltage();
+    }
+    
+    public void toggleDirection() {
+    	
+    	forkliftDirection *= -1;
     }
     
     public void updateForkliftDashboard() {

@@ -1,5 +1,6 @@
 package com.team2502.robot2015;
 
+import com.team2502.robot2015.commands.forklift.ToggleDirection;
 import com.team2502.robot2015.commands.forklift.ToggleForklift;
 import com.team2502.robot2015.commands.vision.ToggleCamera;
 
@@ -42,6 +43,7 @@ public class OI {
 	private static Joystick driveStick;
 	private static Joystick liftStick;
 	private static Button forkliftButton;
+	private static Button forkliftDirection;
 	private static Button toggleCameraButton;
 
 	public OI() {
@@ -52,6 +54,9 @@ public class OI {
 		liftStick = new Joystick(RobotMap.LEFT_JOYSTICK);
 		forkliftButton = new JoystickButton(liftStick, 1);
 		forkliftButton.whenPressed(new ToggleForklift());
+		
+		forkliftDirection = new JoystickButton(liftStick, 3);
+		forkliftDirection.whenPressed(new ToggleDirection());
 	}
 
 	public static Joystick getDriveStick() {
