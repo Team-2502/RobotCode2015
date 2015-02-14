@@ -91,6 +91,7 @@ public class Forklift extends Subsystem {
     	
     	SmartDashboard.putNumber("Forklift Voltage", getSensorVoltage());
     	SmartDashboard.putNumber("Forklift Height", getHeight());
+    	SmartDashboard.putNumber("Throttle", OI.getLiftStick().getThrottle());
     	
     	
     	

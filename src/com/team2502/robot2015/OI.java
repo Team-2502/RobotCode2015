@@ -1,6 +1,7 @@
 package com.team2502.robot2015;
 
 import com.team2502.robot2015.commands.forklift.ToggleForklift;
+import com.team2502.robot2015.commands.vision.ToggleCamera;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -41,9 +42,13 @@ public class OI {
 	private static Joystick driveStick;
 	private static Joystick liftStick;
 	private static Button forkliftButton;
+	private static Button toggleCameraButton;
 
 	public OI() {
 		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
+		toggleCameraButton = new JoystickButton(driveStick, 2);
+		toggleCameraButton.whenPressed(new ToggleCamera());
+		
 		liftStick = new Joystick(RobotMap.LEFT_JOYSTICK);
 		forkliftButton = new JoystickButton(liftStick, 1);
 		forkliftButton.whenPressed(new ToggleForklift());
