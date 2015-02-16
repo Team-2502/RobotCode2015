@@ -4,6 +4,7 @@ import com.team2502.robot2015.OI;
 import com.team2502.robot2015.RobotMap;
 import com.team2502.robot2015.commands.SlideDrive;
 
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,6 +27,8 @@ public class DriveTrain extends Subsystem {
 	private final CANTalon rightFront;
 	private final CANTalon rightBack;
 	private final CANTalon rightSlide;
+	
+	private final BuiltInAccelerometer accel;
 
 	private DriveTrain() {
 		leftFront = new CANTalon(RobotMap.LEFT_FRONT_DRIVE);
@@ -36,6 +39,7 @@ public class DriveTrain extends Subsystem {
 		rightBack = new CANTalon(RobotMap.RIGHT_BACK_DRIVE);
 		rightSlide = new CANTalon(RobotMap.RIGHT_SLIDE_DRIVE);
 		drive = new RobotDrive(leftFront, leftBack, rightFront, rightBack);
+		accel = new BuiltInAccelerometer();
 		
 		leftFront.setPosition(0);
 		leftBack.setPosition(0);
@@ -123,6 +127,10 @@ public class DriveTrain extends Subsystem {
 			SmartDashboard.putNumber(m.toString() + " Encoder", en);
 			
 		}
+		
+		SmartDashboard.putNumber("X: ", accel.getX());
+		SmartDashboard.putNumber("Y: ", accel.getY());
+		SmartDashboard.putNumber("Z: ", accel.getZ());
 
 	}
 }
