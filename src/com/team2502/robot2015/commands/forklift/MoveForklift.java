@@ -1,4 +1,4 @@
-package com.team2502.robot2015.commands;
+package com.team2502.robot2015.commands.forklift;
 
 import com.team2502.robot2015.OI;
 import com.team2502.robot2015.Robot;

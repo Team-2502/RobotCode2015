@@ -2,7 +2,7 @@ package com.team2502.robot2015.subsystems;
 
 import com.team2502.robot2015.OI;
 import com.team2502.robot2015.RobotMap;
-import com.team2502.robot2015.commands.SlideDrive;
+import com.team2502.robot2015.commands.drive.SlideDrive;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -128,9 +128,9 @@ public class DriveTrain extends Subsystem {
 			
 		}
 		
-		SmartDashboard.putNumber("X: ", accel.getX());
-		SmartDashboard.putNumber("Y: ", accel.getY());
-		SmartDashboard.putNumber("Z: ", accel.getZ());
+		SmartDashboard.putNumber("X", accel.getX());
+		SmartDashboard.putNumber("Y", accel.getY());
+		SmartDashboard.putNumber("Z", accel.getZ());
 
 	}
 }

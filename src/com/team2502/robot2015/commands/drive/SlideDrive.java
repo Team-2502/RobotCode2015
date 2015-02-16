@@ -1,4 +1,4 @@
-package com.team2502.robot2015.commands;
+package com.team2502.robot2015.commands.drive;
 
 import com.team2502.robot2015.Robot;
 import com.team2502.robot2015.subsystems.DriveTrain;

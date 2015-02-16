@@ -1,21 +1,21 @@
 package com.team2502.robot2015.commands.forklift;
 
 import com.team2502.robot2015.Robot;
-import com.team2502.robot2015.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ToggleForklift extends Command {
+public class SetRightForced extends Command {
 
-	private Forklift fl = Robot.forklift;
+	private boolean forced;
 	
-    public ToggleForklift() {
+    public SetRightForced(boolean forced) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.forklift);
+    	this.forced = forced;
     }
 
     // Called just before this Command runs the first time
@@ -24,8 +24,7 @@ public class ToggleForklift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	fl.setState(!(fl.isOpenLeft() || fl.isOpenRight()));
+    	Robot.forklift.setRightForced(forced);
     }
 
     // Make this return true when this Command no longer needs to run execute()
