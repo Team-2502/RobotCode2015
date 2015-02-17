@@ -11,6 +11,7 @@ import com.team2502.robot2015.commands.ExampleCommand;
 import com.team2502.robot2015.subsystems.DriveTrain;
 import com.team2502.robot2015.subsystems.ExampleSubsystem;
 import com.team2502.robot2015.subsystems.Forklift;
+import com.team2502.robot2015.subsystems.ScorpionTail;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static final DriveTrain driveTrain = DriveTrain.getInstance();
 	public static OI oi;
 	public static final Forklift forklift = new Forklift();
+	public static final ScorpionTail scorpion = new ScorpionTail();
 
 //    Command autonomousCommand;
 

@@ -51,6 +51,7 @@ public class OI {
 	private static Button toggleCameraButton;
 	private static Button forceLeft;
 	private static Button forceRight;
+	private static Button scorpion;
 
 	public OI() {
 		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
