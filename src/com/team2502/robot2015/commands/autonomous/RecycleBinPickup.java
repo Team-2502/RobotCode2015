@@ -23,10 +23,10 @@ public class RecycleBinPickup extends CommandGroup {
     	requires(Robot.driveTrain);
     	requires(Robot.scorpion);
     	
-    	addSequential(new MoveTime(0.25, 1));
+    	addSequential(new MoveTime(0.5, 1));
     	addSequential(new WaitCommand(0.3));
 //    	addSequential(new MoveDistance(-72, 1));
-    	addSequential(new MoveTime(12, 0.5));
+    	addSequential(new MoveTime(4, -0.5));
     	addSequential(new MoveTailTime(2, 1));
 //    	addSequential(new MoveDistance(24, 1));
     	// Add Commands here:
