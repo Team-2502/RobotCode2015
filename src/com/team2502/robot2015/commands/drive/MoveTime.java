@@ -4,16 +4,17 @@ import com.team2502.robot2015.Robot;
 import com.team2502.robot2015.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class MoveTime extends Command {
 
-	private static DriveTrain dt = Robot.driveTrain;
-	private static double time;
-	private static double startTime;
-	private static double speed;
+	private DriveTrain dt = Robot.driveTrain;
+	private double time;
+	private double startTime;
+	private double speed;
 	
     public MoveTime(double time, double speed) {
         // Use requires() here to declare subsystem dependencies
@@ -31,11 +32,12 @@ public class MoveTime extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	dt.moveMainDrive(speed);
+    	SmartDashboard.putNumber("Time", System.currentTimeMillis());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return System.currentTimeMillis() - (time * 1000) > startTime;
+        return System.currentTimeMillis() - (time * 1000d) >= startTime;
     }
 
     // Called once after isFinished returns true

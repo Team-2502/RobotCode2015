@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class SlideTime extends Command {
 
-	private static DriveTrain dt = Robot.driveTrain;
-	private static double time;
-	private static double startTime;
-	private static double speed;
+	private DriveTrain dt = Robot.driveTrain;
+	private double time;
+	private double startTime;
+	private double speed;
 	
     public SlideTime(double time, double speed) {
         // Use requires() here to declare subsystem dependencies

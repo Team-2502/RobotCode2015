@@ -8,6 +8,7 @@ import com.team2502.robot2015.subsystems.DriveTrain;
 import com.team2502.robot2015.subsystems.ScorpionTail;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -22,10 +23,12 @@ public class RecycleBinPickup extends CommandGroup {
     	requires(Robot.driveTrain);
     	requires(Robot.scorpion);
     	
-    	addSequential(new MoveTime(1, 1));
-    	addSequential(new MoveDistance(-72, 1));
-    	addSequential(new MoveTailTime(1, 4));
-    	addSequential(new MoveDistance(24, 1));
+    	addSequential(new MoveTime(0.25, 1));
+    	addSequential(new WaitCommand(0.3));
+//    	addSequential(new MoveDistance(-72, 1));
+    	addSequential(new MoveTime(12, 0.5));
+    	addSequential(new MoveTailTime(2, 1));
+//    	addSequential(new MoveDistance(24, 1));
     	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

@@ -27,7 +27,7 @@ public class MoveForklift extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (!OI.getLiftStick().getRawButton(3)) {
+		if (!OI.getLiftStick().getRawButton(2)) {
 			if (Math.abs(OI.getLiftStick().getY()) < 0.01) {
 				if (settingTargetHeight) {
 					targetHeight = fl.getHeight();
@@ -44,6 +44,8 @@ public class MoveForklift extends Command {
 				settingTargetHeight = true;
 				fl.moveLift();
 			}
+		} else {
+			fl.stop();
 		}
 	}
 

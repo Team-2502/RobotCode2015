@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class SlideDrive extends Command {
 
-	private static DriveTrain dt = Robot.driveTrain;
+	private DriveTrain dt = Robot.driveTrain;
 
 	public SlideDrive() {
 		requires(Robot.driveTrain);

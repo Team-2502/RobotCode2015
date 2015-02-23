@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import com.team2502.robot2015.commands.ExampleCommand;
+import com.team2502.robot2015.commands.autonomous.RecycleBinPickup;
 import com.team2502.robot2015.subsystems.DriveTrain;
 import com.team2502.robot2015.subsystems.ExampleSubsystem;
 import com.team2502.robot2015.subsystems.Forklift;
@@ -28,7 +29,7 @@ public class Robot extends IterativeRobot {
 	public static final Forklift forklift = new Forklift();
 	public static final ScorpionTail scorpion = new ScorpionTail();
 
-//    Command autonomousCommand;
+    Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -39,6 +40,7 @@ public class Robot extends IterativeRobot {
 		CameraServer.getInstance().startAutomaticCapture("cam0");
         // instantiate the command used for the autonomous period
 //        autonomousCommand = new ExampleCommand();
+		autonomousCommand = new RecycleBinPickup();
     }
 	
 	public void disabledPeriodic() {
@@ -47,7 +49,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-//        if (autonomousCommand != null) autonomousCommand.start();
+        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
@@ -62,7 +64,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-//        if (autonomousCommand != null) autonomousCommand.cancel();
+        if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
     /**
