@@ -6,6 +6,7 @@ import com.team2502.robot2015.commands.forklift.SetLeftForced;
 import com.team2502.robot2015.commands.forklift.SetRightForced;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -20,7 +21,8 @@ public class Pickup extends CommandGroup {
     	
     	addParallel(new SetLeftForced(true));
     	addParallel(new SetRightForced(true));
-    	addSequential(new MoveLiftTime(.5, 1));
+    	addSequential(new WaitCommand(.25));
+    	addSequential(new MoveLiftTime(.2, 1));
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
