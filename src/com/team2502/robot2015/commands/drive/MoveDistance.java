@@ -19,6 +19,7 @@ public class MoveDistance extends Command {
 	private DriveTrain dt = Robot.driveTrain;
 	private ArrayList<Double> lastEncoderValues = new ArrayList<Double>();
 	private double movedDistance = 0;
+	private double startTime;
 	
     public MoveDistance(double distance, double speed) {
         // Use requires() here to declare subsystem dependencies
@@ -34,12 +35,13 @@ public class MoveDistance extends Command {
     	for (Motors m : Motors.values()) {
     		lastEncoderValues.add(dt.getEncoderValue(m));
     	}
+    	startTime = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    
-    	dt.moveMainDrive(speed);
+    	dt.moveMainDrive(dt.rampUpTo(speed, startTime, 1d));
+//    	dt.moveMainDrive(speed);
     	
     }
 

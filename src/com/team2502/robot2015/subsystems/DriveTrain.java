@@ -134,7 +134,8 @@ public class DriveTrain extends Subsystem {
 
 	}
 
-	public double rampUpTo(double speed, double changeInTime, double rampMultiplier) {
+	public double rampUpTo(double speed, double startTime, double rampMultiplier) {
+		double changeInTime = (System.currentTimeMillis() - startTime) / 1000;
 		if (changeInTime * rampMultiplier < speed) {
 			return changeInTime * rampMultiplier;
 		} else {
@@ -143,6 +144,7 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public double rampDownFrom(double speed, double currentTime, double targetTime, double rampMultiplier) {
+		
 		if (currentTime < targetTime) {
 			if ((targetTime - currentTime) * rampMultiplier < speed) {
 				return (targetTime - currentTime) * rampMultiplier;

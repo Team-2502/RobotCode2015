@@ -31,7 +31,7 @@ public class MoveTime extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	dt.moveMainDrive(speed);
+    	dt.moveMainDrive(dt.rampUpTo(speed, startTime, 1d));
     	SmartDashboard.putNumber("Time", System.currentTimeMillis());
     }
 
