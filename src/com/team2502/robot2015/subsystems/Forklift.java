@@ -26,7 +26,7 @@ public class Forklift extends Subsystem {
 	private final Solenoid rightArm = new Solenoid(
 			RobotMap.FORKLIFT_SOLENOID_RIGHT);
 	private final AnalogInput sensor = new AnalogInput(RobotMap.FORKLIFT_SENSOR);
-	private static int forkliftDirection = 1;
+	private static int forkliftDirection = -1;
 
 	
 	private boolean isLeftForced = false;

@@ -10,38 +10,36 @@ public class MoveScorpion extends Command {
 
 	private ScorpionTail s = Robot.scorpion;
 	
+	public MoveScorpion() {
+		requires(Robot.scorpion);
+	}
+
 	protected void initialize() {
-		
+
 	}
 
-	
 	protected void execute() {
-		if(OI.getLiftStick().getRawButton(3)) {
-			
-			s.move(OI.getLiftStick().getY() * OI.getLiftStick().getY());
-			
-			
+		if (OI.getLiftStick().getRawButton(2)) {
+			s.move(OI.getLiftStick().getY() * Math.abs(OI.getLiftStick().getY()));
+		} else {
+			s.stop();
 		}
-		
-		
-	}
 
+	}
 
 	protected boolean isFinished() {
-		
+
 		return false;
 	}
 
-	
 	protected void end() {
-	
-		
+
 	}
 
 	@Override
 	protected void interrupted() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
