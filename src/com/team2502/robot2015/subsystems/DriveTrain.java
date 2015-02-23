@@ -27,7 +27,7 @@ public class DriveTrain extends Subsystem {
 	private final CANTalon rightFront;
 	private final CANTalon rightBack;
 	private final CANTalon rightSlide;
-	
+
 	private final BuiltInAccelerometer accel;
 
 	private DriveTrain() {
@@ -40,11 +40,11 @@ public class DriveTrain extends Subsystem {
 		rightSlide = new CANTalon(RobotMap.RIGHT_SLIDE_DRIVE);
 		drive = new RobotDrive(leftFront, leftBack, rightFront, rightBack);
 		accel = new BuiltInAccelerometer();
-		
+
 		leftFront.setPosition(0);
 		leftBack.setPosition(0);
 		leftSlide.setPosition(0);
-		
+
 		rightFront.setPosition(0);
 		rightBack.setPosition(0);
 		rightSlide.setPosition(0);
@@ -125,12 +125,32 @@ public class DriveTrain extends Subsystem {
 
 			SmartDashboard.putNumber(m.toString() + " Distance", dist);
 			SmartDashboard.putNumber(m.toString() + " Encoder", en);
-			
+
 		}
-		
+
 		SmartDashboard.putNumber("X", accel.getX());
 		SmartDashboard.putNumber("Y", accel.getY());
 		SmartDashboard.putNumber("Z", accel.getZ());
 
+	}
+
+	public double rampUpTo(double speed, double changeInTime, double rampMultiplier) {
+		if (changeInTime * rampMultiplier < speed) {
+			return changeInTime * rampMultiplier;
+		} else {
+			return speed;
+		}
+	}
+
+	public double rampDownFrom(double speed, double currentTime, double targetTime, double rampMultiplier) {
+		if (currentTime < targetTime) {
+			if ((targetTime - currentTime) * rampMultiplier < speed) {
+				return (targetTime - currentTime) * rampMultiplier;
+			} else {
+				return speed;
+			}
+		} else {
+			return 0;
+		}
 	}
 }
