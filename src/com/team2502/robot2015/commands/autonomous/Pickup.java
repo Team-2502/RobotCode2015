@@ -1,5 +1,7 @@
 package com.team2502.robot2015.commands.autonomous;
 
+import com.team2502.robot2015.commands.drive.MoveTime;
+import com.team2502.robot2015.commands.drive.TurnDegrees;
 import com.team2502.robot2015.commands.forklift.MoveLiftTime;
 import com.team2502.robot2015.commands.forklift.MoveUp;
 import com.team2502.robot2015.commands.forklift.SetLeftForced;
@@ -20,9 +22,16 @@ public class Pickup extends CommandGroup {
         // these will run in order.
     	
     	addParallel(new SetLeftForced(true));
-    	addParallel(new SetRightForced(true));
+    	addSequential(new SetRightForced(true));
     	addSequential(new WaitCommand(.25));
     	addSequential(new MoveLiftTime(.2, 1));
+    	addSequential(new TurnDegrees(180, 1));
+    	addSequential(new MoveTime(2, 1));
+    	addSequential(new MoveLiftTime(.2, -1));
+    	addSequential(new WaitCommand(.25));
+    	addParallel(new SetLeftForced(false));
+    	addSequential(new SetRightForced(false));
+    	
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
