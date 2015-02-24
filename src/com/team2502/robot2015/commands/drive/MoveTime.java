@@ -15,6 +15,7 @@ public class MoveTime extends Command {
 	private double time;
 	private double startTime;
 	private double speed;
+	private double rampMulti = 1;
 	
     public MoveTime(double time, double speed) {
         // Use requires() here to declare subsystem dependencies
@@ -22,6 +23,11 @@ public class MoveTime extends Command {
     	requires(Robot.driveTrain);
     	this.speed = speed;
     	this.time = time;
+    }
+    
+    public MoveTime(double time, double speed, double rampMulti) {
+    	this(time, speed);
+    	this.rampMulti = rampMulti;
     }
 
     // Called just before this Command runs the first time
@@ -31,8 +37,11 @@ public class MoveTime extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	dt.moveMainDrive(dt.rampUpTo(speed, startTime, 1d));
-    	SmartDashboard.putNumber("Time", System.currentTimeMillis());
+    	if (System.currentTimeMillis() - startTime < time * 500) {
+    		dt.moveMainDrive(dt.rampUpTo(speed, startTime, rampMulti));
+    	} else {
+    		dt.moveMainDrive(dt.rampDownFrom(speed, startTime / 1000d + time, rampMulti));
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
