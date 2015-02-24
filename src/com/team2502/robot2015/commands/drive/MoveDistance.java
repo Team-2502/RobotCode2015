@@ -40,7 +40,11 @@ public class MoveDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (movedDistance * 2 < distance) {
     	dt.moveMainDrive(dt.rampUpTo(speed, startTime, 1d));
+    	} else {
+        	dt.moveMainDrive(dt.rampDownFrom(speed, System.currentTimeMillis() + ((distance - movedDistance) / 12) + (5 * speed), 1d));
+    	}
 //    	dt.moveMainDrive(speed);
     	
     }

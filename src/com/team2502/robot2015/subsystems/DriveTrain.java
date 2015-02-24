@@ -121,7 +121,7 @@ public class DriveTrain extends Subsystem {
 		for (Motors m : Motors.values()) {
 
 			double en = getEncoderValue(m);
-			double dist = ((WHEEL_DIAMETER * Math.PI) * en);
+			double dist = ((WHEEL_DIAMETER * Math.PI) * (en / 360));
 
 			SmartDashboard.putNumber(m.toString() + " Distance", dist);
 			SmartDashboard.putNumber(m.toString() + " Encoder", en);
@@ -135,19 +135,21 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public double rampUpTo(double speed, double startTime, double rampMultiplier) {
+		double absSpeed = Math.abs(speed);
 		double changeInTime = (System.currentTimeMillis() - startTime) / 1000;
-		if (changeInTime * rampMultiplier < speed) {
-			return changeInTime * rampMultiplier;
+		if (changeInTime * rampMultiplier < absSpeed) {
+			return changeInTime * rampMultiplier * (speed < 0 ? -1 : 1);
 		} else {
 			return speed;
 		}
 	}
 
-	public double rampDownFrom(double speed, double currentTime, double targetTime, double rampMultiplier) {
-		
+	public double rampDownFrom(double speed, double targetTime, double rampMultiplier) {
+		double absSpeed = Math.abs(speed);
+		double currentTime = System.currentTimeMillis() / 1000d;
 		if (currentTime < targetTime) {
-			if ((targetTime - currentTime) * rampMultiplier < speed) {
-				return (targetTime - currentTime) * rampMultiplier;
+			if ((targetTime - currentTime) * rampMultiplier < absSpeed) {
+				return (targetTime - currentTime) * rampMultiplier  * (speed < 0 ? -1 : 1);
 			} else {
 				return speed;
 			}
