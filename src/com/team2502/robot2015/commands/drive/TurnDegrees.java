@@ -29,7 +29,7 @@ public class TurnDegrees extends Command {
     	requires(Robot.driveTrain);
     	this.speed = speed;
     	this.degrees = degrees;
-    	this.distance = degrees * (DriveTrain.WHEEL_DIAMETER * Math.PI);
+    	this.distance = (degrees / 90) * 30 / (DriveTrain.WHEEL_DIAMETER * Math.PI) * 360 * 4;
     	left = (degrees > 0) ? 1 : -1;
     	right = -left;
     }
@@ -56,8 +56,8 @@ public class TurnDegrees extends Command {
     	
     	double diff = encoderValues.get(0) - lastEncoderValues.get(0);
     	double smallestDiff = encoderValues.get(0) - lastEncoderValues.get(0);
-    	for (int i = 1; i < encoderValues.size(); i++) {
-    		if (i != 2 && i != 5) {
+    	for (int i = 0; i < encoderValues.size(); i++) {
+    		if (i != 1 && i != 3) {
     			diff = encoderValues.get(i) - lastEncoderValues.get(i);
     			if (Math.abs(diff) < Math.abs(smallestDiff)) smallestDiff = diff;
     		}
@@ -65,7 +65,7 @@ public class TurnDegrees extends Command {
     	movedDistance += smallestDiff;
     	lastEncoderValues = encoderValues;
     	
-    	return ((DriveTrain.WHEEL_DIAMETER * Math.PI) * movedDistance) - distance > 0;
+    	return movedDistance - distance > 0;
     }
 
     // Called once after isFinished returns true
