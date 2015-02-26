@@ -28,22 +28,22 @@ public class MoveForklift extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (!OI.getLiftStick().getRawButton(2)) {
-			if (Math.abs(OI.getLiftStick().getY()) < 0.01) {
-				if (settingTargetHeight) {
-					targetHeight = fl.getHeight();
-					settingTargetHeight = false;
-				} else {
-					if (fl.getHeight() < targetHeight
-							&& targetHeight - fl.getHeight() < 12) {
-						fl.move(0 - (targetHeight - fl.getHeight()) / 12);
-					} else {
-						fl.stop();
-					}
-				}
-			} else {
-				settingTargetHeight = true;
+//			if (Math.abs(OI.getLiftStick().getY()) < 0.01) {
+//				if (settingTargetHeight) {
+//					targetHeight = fl.getHeight();
+//					settingTargetHeight = false;
+//				} else {
+//					if (fl.getHeight() < targetHeight
+//							&& targetHeight - fl.getHeight() < 12) {
+//						fl.move(0 - (targetHeight - fl.getHeight()) / 12);
+//					} else {
+//						fl.stop();
+//					}
+//				}
+//			} else {
+//				settingTargetHeight = true;
 				fl.moveLift();
-			}
+//			}
 		} else {
 			fl.stop();
 		}

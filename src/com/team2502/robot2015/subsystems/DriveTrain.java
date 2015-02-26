@@ -15,38 +15,38 @@ public class DriveTrain extends Subsystem {
 	public static final double WHEEL_DIAMETER = 5;
 
 	public enum Motors {
-		LEFT_FRONT, LEFT_BACK, LEFT_SLIDE, RIGHT_FRONT, RIGHT_BACK, RIGHT_SLIDE
+		LEFT_FRONT, LEFT_SLIDE, RIGHT_FRONT, RIGHT_SLIDE
 	}
 
 	private static DriveTrain instance;
 	private final RobotDrive drive;
 	private final CANTalon leftFront;
-	private final CANTalon leftBack;
+//	private final CANTalon leftBack;
 	private final CANTalon leftSlide;
 
 	private final CANTalon rightFront;
-	private final CANTalon rightBack;
+//	private final CANTalon rightBack;
 	private final CANTalon rightSlide;
 
 	private final BuiltInAccelerometer accel;
 
 	private DriveTrain() {
 		leftFront = new CANTalon(RobotMap.LEFT_FRONT_DRIVE);
-		leftBack = new CANTalon(RobotMap.LEFT_BACK_DRIVE);
+//		leftBack = new CANTalon(RobotMap.LEFT_BACK_DRIVE);
 		leftSlide = new CANTalon(RobotMap.LEFT_SLIDE_DRIVE);
 
 		rightFront = new CANTalon(RobotMap.RIGHT_FRONT_DRIVE);
-		rightBack = new CANTalon(RobotMap.RIGHT_BACK_DRIVE);
+//		rightBack = new CANTalon(RobotMap.RIGHT_BACK_DRIVE);
 		rightSlide = new CANTalon(RobotMap.RIGHT_SLIDE_DRIVE);
-		drive = new RobotDrive(leftFront, leftBack, rightFront, rightBack);
+		drive = new RobotDrive(leftFront, rightFront);
 		accel = new BuiltInAccelerometer();
 
 		leftFront.setPosition(0);
-		leftBack.setPosition(0);
+//		leftBack.setPosition(0);
 		leftSlide.setPosition(0);
 
 		rightFront.setPosition(0);
-		rightBack.setPosition(0);
+//		rightBack.setPosition(0);
 		rightSlide.setPosition(0);
 	}
 
@@ -101,14 +101,14 @@ public class DriveTrain extends Subsystem {
 		switch (motor) {
 		case LEFT_FRONT:
 			return leftFront.getPosition();
-		case LEFT_BACK:
-			return leftBack.getPosition();
+//		case LEFT_BACK:
+//			return leftBack.getPosition();
 		case LEFT_SLIDE:
 			return leftSlide.getPosition();
 		case RIGHT_FRONT:
-			return rightFront.getPosition();
-		case RIGHT_BACK:
-			return rightBack.getPosition();
+			return rightFront.getPosition() * 100;
+//		case RIGHT_BACK:
+//			return rightBack.getPosition();
 		case RIGHT_SLIDE:
 			return rightSlide.getPosition();
 		default:
@@ -121,7 +121,7 @@ public class DriveTrain extends Subsystem {
 		for (Motors m : Motors.values()) {
 
 			double en = getEncoderValue(m);
-			double dist = ((WHEEL_DIAMETER * Math.PI) * (en / 360));
+			double dist = ((WHEEL_DIAMETER * Math.PI) * (en / 1440));
 
 			SmartDashboard.putNumber(m.toString() + " Distance", dist);
 			SmartDashboard.putNumber(m.toString() + " Encoder", en);

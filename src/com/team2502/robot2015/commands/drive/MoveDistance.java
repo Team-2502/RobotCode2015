@@ -40,11 +40,11 @@ public class MoveDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (movedDistance * 2 < distance) {
+//    	if (movedDistance * 2 < distance) {
     	dt.moveMainDrive(dt.rampUpTo(speed, startTime, 1d));
-    	} else {
-        	dt.moveMainDrive(dt.rampDownFrom(speed, System.currentTimeMillis() + ((distance - movedDistance) / 12) + (5 * speed), 1d));
-    	}
+//    	} else {
+//        	dt.moveMainDrive(dt.rampDownFrom(speed, System.currentTimeMillis() + ((distance - movedDistance) / 12) + (5 * speed), 1d));
+//    	}
 //    	dt.moveMainDrive(speed);
     	
     }
@@ -60,12 +60,13 @@ public class MoveDistance extends Command {
     	double diff = encoderValues.get(0) - lastEncoderValues.get(0);
     	double smallestDiff = encoderValues.get(0) - lastEncoderValues.get(0);
     	for (int i = 1; i < encoderValues.size(); i++) {
-    		if (i != 2 && i != 5) {
+    		if (i != 1 && i != 3) {
     			diff = encoderValues.get(i) - lastEncoderValues.get(i);
     			if (Math.abs(diff) < Math.abs(smallestDiff)) smallestDiff = diff;
     		}
     	}
-    	movedDistance += smallestDiff;
+    	smallestDiff /= 1440;
+    	movedDistance += Math.abs(smallestDiff);
     	lastEncoderValues = encoderValues;
     	
     	return ((DriveTrain.WHEEL_DIAMETER * Math.PI) * movedDistance) - distance > 0;
