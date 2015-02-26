@@ -54,15 +54,17 @@ public class TurnDegrees extends Command {
     		encoderValues.add(dt.getEncoderValue(m));
     	}
     	
-    	double diff = encoderValues.get(0) - lastEncoderValues.get(0);
-    	double smallestDiff = encoderValues.get(0) - lastEncoderValues.get(0);
-    	for (int i = 0; i < encoderValues.size(); i++) {
-    		if (i != 1 && i != 3) {
-    			diff = encoderValues.get(i) - lastEncoderValues.get(i);
-    			if (Math.abs(diff) < Math.abs(smallestDiff)) smallestDiff = diff;
-    		}
-    	}
-    	movedDistance += smallestDiff;
+    	double diff1 = Math.abs(encoderValues.get(0)) -  Math.abs(lastEncoderValues.get(0));
+    	double diff2 =  Math.abs(encoderValues.get(2)) -  Math.abs(lastEncoderValues.get(2));
+    	
+//    	double smallestDiff = encoderValues.get(0) - lastEncoderValues.get(0);
+//    	for (int i = 0; i < encoderValues.size(); i++) {
+//    		if (i != 1 && i != 3) {
+//    			diff = encoderValues.get(i) - lastEncoderValues.get(i);
+//    			if (Math.abs(diff) < Math.abs(smallestDiff)) smallestDiff = diff;
+//    		}
+//    	}
+    	movedDistance += diff1 + diff2;
     	lastEncoderValues = encoderValues;
     	
     	return movedDistance - distance > 0;
