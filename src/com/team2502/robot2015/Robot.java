@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import com.team2502.robot2015.commands.ExampleCommand;
+import com.team2502.robot2015.commands.autonomous.Pickup;
 import com.team2502.robot2015.commands.autonomous.RecycleBinPickup;
 import com.team2502.robot2015.subsystems.DriveTrain;
 import com.team2502.robot2015.subsystems.ExampleSubsystem;
@@ -40,7 +41,8 @@ public class Robot extends IterativeRobot {
 		CameraServer.getInstance().startAutomaticCapture("cam0");
         // instantiate the command used for the autonomous period
 //        autonomousCommand = new ExampleCommand();
-		autonomousCommand = new RecycleBinPickup();
+//		autonomousCommand = new RecycleBinPickup();
+//		autonomousCommand = new Pickup();
     }
 	
 	public void disabledPeriodic() {

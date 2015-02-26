@@ -2,10 +2,12 @@ package com.team2502.robot2015.commands.autonomous;
 
 import com.team2502.robot2015.commands.drive.MoveTime;
 import com.team2502.robot2015.commands.drive.TurnDegrees;
+import com.team2502.robot2015.commands.drive.TurnTime;
 import com.team2502.robot2015.commands.forklift.MoveLiftTime;
 import com.team2502.robot2015.commands.forklift.MoveUp;
 import com.team2502.robot2015.commands.forklift.SetLeftForced;
 import com.team2502.robot2015.commands.forklift.SetRightForced;
+import com.team2502.robot2015.commands.forklift.ToggleForklift;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -21,16 +23,19 @@ public class Pickup extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	
-    	addParallel(new SetLeftForced(true));
-    	addSequential(new SetRightForced(true));
-    	addSequential(new WaitCommand(.25));
-    	addSequential(new MoveLiftTime(.2, 1));
-    	addSequential(new TurnDegrees(180, 1));
-    	addSequential(new MoveTime(2, 1));
-    	addSequential(new MoveLiftTime(.2, -1));
-    	addSequential(new WaitCommand(.25));
-    	addParallel(new SetLeftForced(false));
-    	addSequential(new SetRightForced(false));
+//    	addParallel(new SetLeftForced(true));x
+//    	addSequential(new SetRightForced(true));
+    	addSequential(new ToggleForklift());
+    	addSequential(new WaitCommand(.5));
+    	addSequential(new MoveLiftTime(2, -1));
+//    	addSequential(new TurnDegrees(180, 1));
+    	addSequential(new TurnTime(3.5, -0.9));
+    	addSequential(new MoveLiftTime(2, 1));
+//    	addSequential(new MoveTime(2, 1));
+//    	addSequential(new MoveLiftTime(.3, 1));
+//    	addSequential(new WaitCommand(.25));
+//    	addParallel(new SetLeftForced(false));
+//    	addSequential(new SetRightForced(false));
     	
         // To run multiple commands at the same time,
         // use addParallel()
