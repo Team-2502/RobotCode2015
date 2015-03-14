@@ -2,9 +2,11 @@ package com.team2502.robot2015;
 
 import com.team2502.robot2015.commands.forklift.SetLeftForced;
 import com.team2502.robot2015.commands.forklift.SetRightForced;
+import com.team2502.robot2015.commands.forklift.SpinIntake;
 import com.team2502.robot2015.commands.forklift.ToggleDirection;
 import com.team2502.robot2015.commands.forklift.ToggleForklift;
 //import com.team2502.robot2015.commands.vision.ToggleCamera;
+
 
 
 
@@ -52,6 +54,7 @@ public class OI {
 	private static Button forceLeft;
 	private static Button forceRight;
 	private static Button scorpion;
+	private static Button activeIntakeButton;
 
 	public OI() {
 		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
@@ -61,6 +64,9 @@ public class OI {
 		liftStick = new Joystick(RobotMap.LEFT_JOYSTICK);
 		forkliftButton = new JoystickButton(liftStick, 1);
 		forkliftButton.whenPressed(new ToggleForklift());
+		
+		activeIntakeButton = new JoystickButton(driveStick, 1);
+		activeIntakeButton.whileHeld(new SpinIntake());
 		
 		forkliftDirection = new JoystickButton(liftStick, 3);
 		forkliftDirection.whenPressed(new ToggleDirection());

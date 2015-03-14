@@ -21,6 +21,7 @@ public class Forklift extends Subsystem {
 	// here. Call these from Commands.
 
 	private final CANTalon forkliftWinch = new CANTalon(RobotMap.FORKLIFT_WINCH);
+	private final CANTalon activeIntake = new CANTalon(RobotMap.ACTIVE_INTAKE);
 	private final Solenoid leftArm = new Solenoid(
 			RobotMap.FORKLIFT_SOLENOID_LEFT);
 	private final Solenoid rightArm = new Solenoid(
@@ -120,6 +121,17 @@ public class Forklift extends Subsystem {
 
 		forkliftDirection *= -1;
 	}
+	
+	public void spinActiveIntake() {
+		
+		double speed = OI.getDriveStick().getThrottle();
+		if (Math.abs(speed) <= .03) speed = 0;
+		activeIntake.set(speed);
+	}
+	
+	public void stopActiveIntake() {
+		activeIntake.set(0);
+	}
 
 	public void updateForkliftDashboard() {
 
@@ -130,6 +142,7 @@ public class Forklift extends Subsystem {
 		SmartDashboard.putBoolean("Right Forklift Open", isOpenRight());
 		SmartDashboard.putBoolean("Forced Left", isLeftForced());
 		SmartDashboard.putBoolean("Forced Right", isRightForced());
+		SmartDashboard.putNumber("Throttle Value", OI.getDriveStick().getThrottle());
 
 	}
 
