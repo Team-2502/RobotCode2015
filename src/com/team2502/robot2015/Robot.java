@@ -1,13 +1,21 @@
 
 package com.team2502.robot2015;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team2502.robot2015.commands.ExampleCommand;
+import com.team2502.robot2015.commands.autonomous.Move;
 import com.team2502.robot2015.commands.autonomous.Pickup;
 import com.team2502.robot2015.commands.autonomous.RecycleBinPickup;
 import com.team2502.robot2015.subsystems.DriveTrain;
@@ -23,13 +31,19 @@ import com.team2502.robot2015.subsystems.ScorpionTail;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+	enum AutoModes {
+		NOTHING, MOVE, PICKUP_MOVE;
+	}
 
 //	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain driveTrain = DriveTrain.getInstance();
 	public static OI oi;
 	public static final Forklift forklift = new Forklift();
 	public static final ScorpionTail scorpion = new ScorpionTail();
+	public static final PowerDistributionPanel PDP = new PowerDistributionPanel();
 
+	SendableChooser autoChooser = new SendableChooser();
     Command autonomousCommand;
 
     /**
@@ -42,7 +56,10 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
 //        autonomousCommand = new ExampleCommand();
 //		autonomousCommand = new RecycleBinPickup();
-//		autonomousCommand = new Pickup();
+		autoChooser.addObject("Pickup and Move Backwards", AutoModes.PICKUP_MOVE);
+		autoChooser.addObject("Move Backwards", AutoModes.MOVE);
+		autoChooser.addDefault("Do Nothing", AutoModes.NOTHING);
+		SmartDashboard.putData("Auto Mode", autoChooser);
     }
 	
 	public void disabledPeriodic() {
@@ -50,6 +67,17 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	switch ((AutoModes) autoChooser.getSelected()) {
+    	case PICKUP_MOVE:
+    		autonomousCommand = new Pickup();
+    		break;
+    	case MOVE:
+    		autonomousCommand = new Move();
+    		break;
+    	case NOTHING:
+    		autonomousCommand = null;
+    		break;
+    	}
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
@@ -67,6 +95,11 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        try {
+			PrintWriter writer = new PrintWriter("currentLog.log", "UTF-8");
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -84,6 +117,9 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         forklift.updateForkliftDashboard();
         driveTrain.updateDriveDashboard();
+//        writer.println(System.currentTimeMillis() + " FrontRight: " + PDP.getCurrent(12));
+  //      writer.println(System.currentTimeMillis() + " FrontLeft: " + PDP.getCurrent(14));
+        SmartDashboard.putData("PDP", PDP);
     }
     
     /**

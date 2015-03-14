@@ -121,9 +121,9 @@ public class DriveTrain extends Subsystem {
 		for (Motors m : Motors.values()) {
 
 			double en = getEncoderValue(m);
-			double dist = ((WHEEL_DIAMETER * Math.PI) * (en / 1440));
-
-			SmartDashboard.putNumber(m.toString() + " Distance", dist);
+//			double dist = ((WHEEL_DIAMETER * Math.PI) * (en / 1440));
+//
+//			SmartDashboard.putNumber(m.toString() + " Distance", dist);
 			SmartDashboard.putNumber(m.toString() + " Encoder", en);
 
 		}

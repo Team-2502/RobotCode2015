@@ -3,6 +3,7 @@ package com.team2502.robot2015.commands.autonomous;
 import com.team2502.robot2015.Robot;
 import com.team2502.robot2015.commands.drive.MoveDistance;
 import com.team2502.robot2015.commands.drive.MoveTime;
+import com.team2502.robot2015.commands.drive.TurnDegrees;
 import com.team2502.robot2015.commands.drive.TurnTime;
 import com.team2502.robot2015.commands.scorpion.MoveTailTime;
 import com.team2502.robot2015.subsystems.DriveTrain;
@@ -24,7 +25,9 @@ public class RecycleBinPickup extends CommandGroup {
     	requires(Robot.driveTrain);
     	requires(Robot.scorpion);
     	
-    	addSequential(new TurnTime(.9, 1));
+//    	addSequential(new TurnTime(.9, 1));
+    	
+    	addSequential(new TurnDegrees(90, 0.9));
     	
     	addParallel(new MoveTime(0.3, 1, 1000));
     	addSequential(new MoveTailTime(4, -1));
