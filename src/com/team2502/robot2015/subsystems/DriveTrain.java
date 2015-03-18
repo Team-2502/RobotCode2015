@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
 //	private final CANTalon rightBack;
 	private final CANTalon rightSlide;
 
-	private final BuiltInAccelerometer accel;
+	private BuiltInAccelerometer accel = new BuiltInAccelerometer();
 
 	private DriveTrain() {
 		leftFront = new CANTalon(RobotMap.LEFT_FRONT_DRIVE);
@@ -125,7 +125,7 @@ public class DriveTrain extends Subsystem {
 
 		}
 
-		BuiltInAccelerometer accel = new BuiltInAccelerometer();
+		
 		accel.updateTable();
 		
 		SmartDashboard.putData("Accelerometer", accel);
@@ -158,5 +158,9 @@ public class DriveTrain extends Subsystem {
 		} else {
 			return 0;
 		}
+	}
+	
+	public BuiltInAccelerometer getAccelerometer() {
+		return accel;
 	}
 }

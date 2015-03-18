@@ -7,6 +7,7 @@ import com.team2502.robot2015.Robot;
 import com.team2502.robot2015.subsystems.DriveTrain;
 import com.team2502.robot2015.subsystems.DriveTrain.Motors;
 
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -20,6 +21,7 @@ public class MoveDistance extends Command {
 	private ArrayList<Double> lastEncoderValues = new ArrayList<Double>();
 	private double movedDistance = 0;
 	private double startTime;
+	private boolean moved = false;
 	
     public MoveDistance(double distance, double speed) {
         // Use requires() here to declare subsystem dependencies
@@ -65,8 +67,10 @@ public class MoveDistance extends Command {
     			if (Math.abs(diff) < Math.abs(smallestDiff)) smallestDiff = diff;
     		}
     	}
+    	BuiltInAccelerometer accel = dt.getAccelerometer();
+    	if (Math.abs(accel.getX()) > .05 || Math.abs(accel.getY()) > .05) moved = true;
     	smallestDiff /= 1440;
-    	movedDistance += Math.abs(smallestDiff);
+    	if (moved) movedDistance += Math.abs(smallestDiff);
     	lastEncoderValues = encoderValues;
     	
     	return ((DriveTrain.WHEEL_DIAMETER * Math.PI) * movedDistance) - distance > 0;
