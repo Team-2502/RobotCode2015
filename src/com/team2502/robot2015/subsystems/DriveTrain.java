@@ -126,6 +126,8 @@ public class DriveTrain extends Subsystem {
 		}
 
 		BuiltInAccelerometer accel = new BuiltInAccelerometer();
+		accel.updateTable();
+		
 		SmartDashboard.putData("Accelerometer", accel);
 		SmartDashboard.putNumber("X", accel.getX());
 		SmartDashboard.putNumber("Y", accel.getY());
