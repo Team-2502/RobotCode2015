@@ -76,12 +76,9 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void slideDrive() {
-		drive.arcadeDrive(-OI.getDriveStick().getY(), -OI.getDriveStick()
-				.getZ(), true);
-		leftSlide.set(OI.getDriveStick().getX()
-				* Math.abs(OI.getDriveStick().getX()));
-		rightSlide.set(OI.getDriveStick().getX()
-				* Math.abs(OI.getDriveStick().getX()));
+		drive.arcadeDrive(OI.getDriveStick().getY(), OI.getDriveStick().getZ(), true);
+		leftSlide.set(-OI.getDriveStick().getX() * Math.abs(OI.getDriveStick().getX()));
+		rightSlide.set(-OI.getDriveStick().getX() * Math.abs(OI.getDriveStick().getX()));
 	}
 
 	public void moveMainDrive(double speed) {

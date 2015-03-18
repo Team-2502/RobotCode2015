@@ -21,7 +21,8 @@ public class Forklift extends Subsystem {
 	// here. Call these from Commands.
 
 	private final CANTalon forkliftWinch = new CANTalon(RobotMap.FORKLIFT_WINCH);
-	private final CANTalon activeIntake = new CANTalon(RobotMap.ACTIVE_INTAKE);
+//	private final CANTalon activeIntake = new CANTalon(RobotMap.ACTIVE_INTAKE);
+	private final Talon activeIntake = new Talon(RobotMap.ACTIVE_INTAKE);
 	private final Solenoid leftArm = new Solenoid(
 			RobotMap.FORKLIFT_SOLENOID_LEFT);
 	private final Solenoid rightArm = new Solenoid(
