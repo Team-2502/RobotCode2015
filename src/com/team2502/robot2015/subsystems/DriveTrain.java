@@ -48,6 +48,7 @@ public class DriveTrain extends Subsystem {
 		rightFront.setPosition(0);
 //		rightBack.setPosition(0);
 		rightSlide.setPosition(0);
+		accel.startLiveWindowMode();
 	}
 
 	public static DriveTrain getInstance() {
@@ -127,6 +128,7 @@ public class DriveTrain extends Subsystem {
 
 		
 		accel.updateTable();
+		
 		
 		SmartDashboard.putData("Accelerometer", accel);
 		SmartDashboard.putNumber("X", accel.getX());

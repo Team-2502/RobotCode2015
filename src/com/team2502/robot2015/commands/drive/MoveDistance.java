@@ -73,7 +73,11 @@ public class MoveDistance extends Command {
     	if (moved) movedDistance += Math.abs(smallestDiff);
     	lastEncoderValues = encoderValues;
     	
-    	return ((DriveTrain.WHEEL_DIAMETER * Math.PI) * movedDistance) - distance > 0;
+    	int dir = -(int) Math.signum(speed);
+    	boolean hitwall = false;
+    	if ((Math.signum(dt.getAccelerometer().getX()) == dir && Math.abs(dt.getAccelerometer().getX()) > .05) || ((Math.signum(dt.getAccelerometer().getX()) == dir && Math.abs(dt.getAccelerometer().getX()) > .05))) hitwall = true;
+    	
+    	return (((DriveTrain.WHEEL_DIAMETER * Math.PI) * movedDistance) - distance > 0) || !hitwall;
         
     }
 
