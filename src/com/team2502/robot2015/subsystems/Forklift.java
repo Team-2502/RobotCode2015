@@ -123,9 +123,9 @@ public class Forklift extends Subsystem {
 		forkliftDirection *= -1;
 	}
 	
-	public void spinActiveIntake() {
+	public void spinActiveIntake(boolean in) {
 		
-		double speed = OI.getDriveStick().getThrottle();
+		double speed = OI.getDriveStick().getThrottle() * ((in) ? 1 : -1);
 		if (Math.abs(speed) <= .03) speed = 0;
 		activeIntake.set(speed);
 	}

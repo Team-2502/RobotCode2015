@@ -54,7 +54,8 @@ public class OI {
 	private static Button forceLeft;
 	private static Button forceRight;
 	private static Button scorpion;
-	private static Button activeIntakeButton;
+	private static Button activeIntakeButtonIn;
+	private static Button activeIntakeButtonOut;
 
 	public OI() {
 		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
@@ -65,8 +66,11 @@ public class OI {
 		forkliftButton = new JoystickButton(liftStick, 1);
 		forkliftButton.whenPressed(new ToggleForklift());
 		
-		activeIntakeButton = new JoystickButton(driveStick, 1);
-		activeIntakeButton.whileHeld(new SpinIntake());
+		activeIntakeButtonIn = new JoystickButton(driveStick, 1);
+		activeIntakeButtonIn.whileHeld(new SpinIntake(true));
+		
+		activeIntakeButtonOut = new JoystickButton(driveStick, 2);
+		activeIntakeButtonOut.whileHeld(new SpinIntake(false));
 		
 		forkliftDirection = new JoystickButton(liftStick, 3);
 		forkliftDirection.whenPressed(new ToggleDirection());

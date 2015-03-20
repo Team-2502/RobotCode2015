@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SpinIntake extends Command {
 
 	private Forklift fl = Robot.forklift;
+	private boolean in;
 	
-    public SpinIntake() {
+    public SpinIntake(boolean in) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.forklift);
+    	this.in = in;
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +27,7 @@ public class SpinIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	fl.spinActiveIntake();
+    	fl.spinActiveIntake(in);
     }
 
     // Make this return true when this Command no longer needs to run execute()
