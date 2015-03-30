@@ -27,13 +27,15 @@ public class Forklift extends Subsystem {
 			RobotMap.FORKLIFT_SOLENOID_LEFT);
 	private final Solenoid rightArm = new Solenoid(
 			RobotMap.FORKLIFT_SOLENOID_RIGHT);
+	private final Solenoid actuator = new Solenoid(
+			RobotMap.FORKLIFT_SOLENOID_ARM);
 	private final AnalogInput sensor = new AnalogInput(RobotMap.FORKLIFT_SENSOR);
 	private static int forkliftDirection = -1;
 
 	
 	private boolean isLeftForced = false;
 	private boolean isRightForced = false;
-
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
@@ -54,7 +56,7 @@ public class Forklift extends Subsystem {
 		}
 
 	}
-
+	
 	//Sets forklift arms to forced closed
 	public void setRightForced(boolean forced) {
 		//Stores data
@@ -86,6 +88,10 @@ public class Forklift extends Subsystem {
 	public void setRight(boolean open) {
 		rightArm.set(open);
 	}
+	
+	public void setActuator(boolean open) {
+		actuator.set(open);
+	}
 
 	public boolean isOpenLeft() {
 
@@ -94,6 +100,10 @@ public class Forklift extends Subsystem {
 
 	public boolean isOpenRight() {
 		return rightArm.get();
+	}
+	
+	public boolean isActuatorOpen() {
+		return actuator.get();
 	}
 
 	public void move(double speed) {
@@ -141,6 +151,7 @@ public class Forklift extends Subsystem {
 		SmartDashboard.putNumber("Throttle", OI.getLiftStick().getThrottle());
 		SmartDashboard.putBoolean("Left Forklift Open", isOpenLeft());
 		SmartDashboard.putBoolean("Right Forklift Open", isOpenRight());
+		SmartDashboard.putBoolean("Forklift Actuator Open", isActuatorOpen());
 		SmartDashboard.putBoolean("Forced Left", isLeftForced());
 		SmartDashboard.putBoolean("Forced Right", isRightForced());
 		SmartDashboard.putNumber("Throttle Value", OI.getDriveStick().getThrottle());

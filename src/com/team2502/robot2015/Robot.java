@@ -14,12 +14,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.team2502.robot2015.commands.ExampleCommand;
 import com.team2502.robot2015.commands.autonomous.Move;
 import com.team2502.robot2015.commands.autonomous.Pickup;
-import com.team2502.robot2015.commands.autonomous.RecycleBinPickup;
 import com.team2502.robot2015.subsystems.DriveTrain;
-import com.team2502.robot2015.subsystems.ExampleSubsystem;
 import com.team2502.robot2015.subsystems.Forklift;
 import com.team2502.robot2015.subsystems.ScorpionTail;
 
@@ -78,6 +75,7 @@ public class Robot extends IterativeRobot {
     		autonomousCommand = null;
     		break;
     	}
+    	
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }

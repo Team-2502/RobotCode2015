@@ -3,9 +3,11 @@ package com.team2502.robot2015;
 import com.team2502.robot2015.commands.forklift.SetLeftForced;
 import com.team2502.robot2015.commands.forklift.SetRightForced;
 import com.team2502.robot2015.commands.forklift.SpinIntake;
+import com.team2502.robot2015.commands.forklift.ForkliftArmActuator;
 import com.team2502.robot2015.commands.forklift.ToggleDirection;
 import com.team2502.robot2015.commands.forklift.ToggleForklift;
 //import com.team2502.robot2015.commands.vision.ToggleCamera;
+
 
 
 
@@ -49,13 +51,14 @@ public class OI {
 	private static Joystick driveStick;
 	private static Joystick liftStick;
 	private static Button forkliftButton;
-	private static Button forkliftDirection;
+	//private static Button forkliftDirection;
 	private static Button toggleCameraButton;
 	private static Button forceLeft;
 	private static Button forceRight;
 	private static Button scorpion;
 	private static Button activeIntakeButtonIn;
 	private static Button activeIntakeButtonOut;
+	private static Button thingy;
 
 	public OI() {
 		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
@@ -72,8 +75,16 @@ public class OI {
 		activeIntakeButtonOut = new JoystickButton(driveStick, 2);
 		activeIntakeButtonOut.whileHeld(new SpinIntake(false));
 		
-		forkliftDirection = new JoystickButton(liftStick, 3);
-		forkliftDirection.whenPressed(new ToggleDirection());
+		//forkliftDirection = new JoystickButton(liftStick, 3);
+		//forkliftDirection.whenPressed(new ToggleDirection());
+		
+		thingy = new JoystickButton(liftStick, 2);
+		thingy.whenPressed(new ForkliftArmActuator());
+
+//		thingy = new JoystickButton(liftStick, 3);
+//		thingy.whenPressed(new ThingyClass(true));
+//		thingy.whenReleased(new ThingyClass(false));
+		
 		
 		forceLeft = new JoystickButton(liftStick, 4);
 		forceLeft.whenPressed(new SetLeftForced(true));
