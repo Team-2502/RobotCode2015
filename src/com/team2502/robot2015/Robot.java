@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		oi = new OI();
-		CameraServer.getInstance().startAutomaticCapture("cam0");
+//		CameraServer.getInstance().startAutomaticCapture("cam0");
 		// instantiate the command used for the autonomous period
 		// autonomousCommand = new ExampleCommand();
 		// autonomousCommand = new RecycleBinPickup();
