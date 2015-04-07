@@ -4,8 +4,10 @@ import com.team2502.robot2015.commands.forklift.SetLeftForced;
 import com.team2502.robot2015.commands.forklift.SetRightForced;
 import com.team2502.robot2015.commands.forklift.SpinIntake;
 import com.team2502.robot2015.commands.forklift.ForkliftArmActuator;
+import com.team2502.robot2015.commands.forklift.ToggleAutoOpenOfIntake;
 import com.team2502.robot2015.commands.forklift.ToggleDirection;
 import com.team2502.robot2015.commands.forklift.ToggleActiveIntakeArms;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -53,6 +55,7 @@ public class OI {
 	private static Button scorpion;
 	private static Button activeIntakeButtonIn;
 	private static Button activeIntakeButtonOut;
+	private static Button toggleActiveIntakeButton;
 	private static Button forkliftArmActuatorButton;
 
 	public OI() {
@@ -63,7 +66,7 @@ public class OI {
 		liftStick = new Joystick(RobotMap.LEFT_JOYSTICK);
 		forkliftActiveIntakeButton = new JoystickButton(liftStick, 1);
 		forkliftActiveIntakeButton.whenPressed(new ToggleActiveIntakeArms());
-
+		
 		activeIntakeButtonIn = new JoystickButton(driveStick, 1);
 		activeIntakeButtonIn.whileHeld(new SpinIntake(true));
 
@@ -75,7 +78,10 @@ public class OI {
 		
 		forkliftArmActuatorButton = new JoystickButton(liftStick, 2);
 		forkliftArmActuatorButton.whenPressed(new ForkliftArmActuator());
-
+		
+		toggleActiveIntakeButton = new JoystickButton(liftStick, 3);
+		toggleActiveIntakeButton.whenPressed(new ToggleAutoOpenOfIntake());
+		
 		forceLeft = new JoystickButton(liftStick, 4);
 		forceLeft.whenPressed(new SetLeftForced(true));
 		forceLeft.whenReleased(new SetLeftForced(false));
