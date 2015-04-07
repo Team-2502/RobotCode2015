@@ -51,7 +51,7 @@ public class MoveForklift extends Command {
 				////////////////////////////////////////////////////////////////////
 				////////////////////////////////////////////////////////////////////
 				//Change the 5.0 Value if you can't get data from smartdashbaord
-				if (fl.getSensorVoltage() > prefs.getDouble("Forklift Voltage", 5.0))
+				if (fl.getSensorVoltage() > prefs.getDouble("Forklift Voltage", 5.0) && fl.isEnable())
 					new OpenSpinIntake();
 				
 //			}

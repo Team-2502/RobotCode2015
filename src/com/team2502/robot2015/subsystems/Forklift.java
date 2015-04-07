@@ -35,7 +35,12 @@ public class Forklift extends Subsystem {
 	
 	private boolean isLeftForced = false;
 	private boolean isRightForced = false;
+	private boolean enabled = true;
 	
+	public boolean isEnable() {
+		return enabled;
+	}
+
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
@@ -55,6 +60,10 @@ public class Forklift extends Subsystem {
 			setRight(open);
 		}
 
+	}
+	
+	public void setAutoOpenEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 	//Sets forklift arms to forced closed
