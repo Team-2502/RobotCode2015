@@ -4,6 +4,7 @@ import com.team2502.robot2015.OI;
 import com.team2502.robot2015.Robot;
 import com.team2502.robot2015.subsystems.Forklift;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -14,6 +15,7 @@ public class MoveForklift extends Command {
 	private Forklift fl = Robot.forklift;
 	private boolean settingTargetHeight = true;
 	private double targetHeight;
+	Preferences prefs;
 
 	public MoveForklift() {
 		// Use requires() here to declare subsystem dependencies
@@ -43,6 +45,15 @@ public class MoveForklift extends Command {
 //			} else {
 //				settingTargetHeight = true;
 				fl.moveLift();
+
+				////////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////////
+				//Change the 5.0 Value if you can't get data from smartdashbaord
+				if (fl.getSensorVoltage() > prefs.getDouble("Forklift Voltage", 5.0) && fl.isEnable())
+					new OpenSpinIntake();
+				
 //			}
 		} else {
 			fl.stop();

@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleForklift extends Command {
+public class ToggleActiveIntakeArms extends Command {
 
 	private Forklift fl = Robot.forklift;
 	
-    public ToggleForklift() {
+    public ToggleActiveIntakeArms() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.forklift);

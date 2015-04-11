@@ -3,7 +3,7 @@ package com.team2502.robot2015.commands.autonomous;
 import com.team2502.robot2015.commands.drive.MoveTime;
 import com.team2502.robot2015.commands.drive.TurnTime;
 import com.team2502.robot2015.commands.forklift.MoveLiftTime;
-import com.team2502.robot2015.commands.forklift.ToggleForklift;
+import com.team2502.robot2015.commands.forklift.ToggleActiveIntakeArms;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -59,7 +59,7 @@ public class Pickup extends CommandGroup {
 
 		// Toggles the forklift from its previous state -> Will be deprecated
 		// soon probably
-		addSequential(new ToggleForklift());
+		addSequential(new ToggleActiveIntakeArms());
 		// Waits for 0.5s
 		addSequential(new WaitCommand(0.5));
 		// Moves the forklift for 1.5s with a speed of -1 (- being reverse
@@ -83,6 +83,6 @@ public class Pickup extends CommandGroup {
 		addSequential(new MoveLiftTime(1.5, 1));
 		// Toggles the forklift from its previous state -> Will be deprecated
 		// soon probably
-		addSequential(new ToggleForklift());
+		addSequential(new ToggleActiveIntakeArms());
 	}
 }
