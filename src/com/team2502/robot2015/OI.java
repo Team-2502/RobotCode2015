@@ -55,7 +55,7 @@ public class OI {
 	private static Button scorpion;
 	private static Button activeIntakeButtonIn;
 	private static Button activeIntakeButtonOut;
-	private static Button thingy;
+	private static Button openForkliftButton;
 	private static Button binHolder;
 
 	public OI() {
@@ -76,8 +76,8 @@ public class OI {
 		//forkliftDirection = new JoystickButton(liftStick, 3);
 		//forkliftDirection.whenPressed(new ToggleDirection());
 		
-		thingy = new JoystickButton(liftStick, 2);
-		thingy.whenPressed(new ForkliftArmActuator());
+		openForkliftButton = new JoystickButton(liftStick, 2);
+		openForkliftButton.whenPressed(new ForkliftArmActuator());
 
 		binHolder = new JoystickButton(driveStick, 3);
 		binHolder.whenPressed(new BinHolder());
