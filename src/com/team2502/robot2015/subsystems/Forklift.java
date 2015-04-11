@@ -137,8 +137,8 @@ public class Forklift extends Subsystem {
 	}
 
 	public double getSensorVoltage() {
-
-		return sensor.getAverageVoltage();
+		return sensor.getVoltage();
+//		return sensor.getAverageVoltage();
 	}
 
 	public void toggleDirection() {
