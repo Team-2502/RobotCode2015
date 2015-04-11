@@ -1,11 +1,13 @@
 package com.team2502.robot2015;
 
+import com.team2502.robot2015.commands.forklift.BinHolder;
 import com.team2502.robot2015.commands.forklift.SetLeftForced;
 import com.team2502.robot2015.commands.forklift.SetRightForced;
 import com.team2502.robot2015.commands.forklift.SpinIntake;
 import com.team2502.robot2015.commands.forklift.ForkliftArmActuator;
 import com.team2502.robot2015.commands.forklift.ToggleDirection;
 import com.team2502.robot2015.commands.forklift.ToggleForklift;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -54,6 +56,7 @@ public class OI {
 	private static Button activeIntakeButtonIn;
 	private static Button activeIntakeButtonOut;
 	private static Button thingy;
+	private static Button binHolder;
 
 	public OI() {
 		driveStick = new Joystick(RobotMap.RIGHT_JOYSTICK);
@@ -76,6 +79,9 @@ public class OI {
 		thingy = new JoystickButton(liftStick, 2);
 		thingy.whenPressed(new ForkliftArmActuator());
 
+		binHolder = new JoystickButton(driveStick, 3);
+		binHolder.whenPressed(new BinHolder());
+		
 		forceLeft = new JoystickButton(liftStick, 4);
 		forceLeft.whenPressed(new SetLeftForced(true));
 		forceLeft.whenReleased(new SetLeftForced(false));

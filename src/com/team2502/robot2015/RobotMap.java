@@ -34,7 +34,10 @@ public class RobotMap {
 	public final static int FORKLIFT_SOLENOID_RIGHT = 6;
 	public final static int FORKLIFT_SENSOR = 0;
 	public final static int FORKLIFT_SOLENOID_ARM = 2;
-	
-	public final static int ACTIVE_INTAKE = 6;
+	public final static int FORKLIFT_TOP_ARMS = 1;
+
+	public final static int ACTIVE_INTAKE_LEFT = 11;
+	public final static int ACTIVE_INTAKE = 9;
+	public final static int ACTIVE_INTAKE_RIGHT = 10;
 	
 }

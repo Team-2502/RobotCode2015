@@ -17,18 +17,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Forklift extends Subsystem {
 
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
 	private final CANTalon forkliftWinch = new CANTalon(RobotMap.FORKLIFT_WINCH);
-//	private final CANTalon activeIntake = new CANTalon(RobotMap.ACTIVE_INTAKE);
 	private final Talon activeIntake = new Talon(RobotMap.ACTIVE_INTAKE);
+//	private final CANTalon activeIntakeLeft = new CANTalon(RobotMap.ACTIVE_INTAKE_LEFT);
+//	private final CANTalon activeIntakeRight = new CANTalon(RobotMap.ACTIVE_INTAKE_RIGHT);
 	private final Solenoid leftArm = new Solenoid(
 			RobotMap.FORKLIFT_SOLENOID_LEFT);
 	private final Solenoid rightArm = new Solenoid(
 			RobotMap.FORKLIFT_SOLENOID_RIGHT);
 	private final Solenoid actuator = new Solenoid(
 			RobotMap.FORKLIFT_SOLENOID_ARM);
+	private final Solenoid binHolder = new Solenoid(
+			RobotMap.FORKLIFT_TOP_ARMS);
 	private final AnalogInput sensor = new AnalogInput(RobotMap.FORKLIFT_SENSOR);
 	private static int forkliftDirection = -1;
 
@@ -37,8 +37,6 @@ public class Forklift extends Subsystem {
 	private boolean isRightForced = false;
 	
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new MoveForklift());
 	}
 
@@ -92,6 +90,10 @@ public class Forklift extends Subsystem {
 	public void setActuator(boolean open) {
 		actuator.set(open);
 	}
+	
+	public void setBinHolder(boolean open) {
+		binHolder.set(open);
+	}
 
 	public boolean isOpenLeft() {
 
@@ -105,10 +107,13 @@ public class Forklift extends Subsystem {
 	public boolean isActuatorOpen() {
 		return actuator.get();
 	}
+	
+	public boolean isBinHolderOpen() {
+		return binHolder.get();
+	}
 
 	public void move(double speed) {
 		forkliftWinch.set(speed);
-		// updateForkliftDashboard();
 	}
 
 	public void moveLift() {
@@ -120,7 +125,6 @@ public class Forklift extends Subsystem {
 	public double getHeight() {
 
 		return 60 - (getSensorVoltage() * 10.1);
-		// return Double.POSITIVE_INFINITY;
 	}
 
 	public double getSensorVoltage() {
@@ -137,10 +141,14 @@ public class Forklift extends Subsystem {
 		
 		double speed = OI.getDriveStick().getThrottle() * ((in) ? 1 : -1);
 		if (Math.abs(speed) <= .03) speed = 0;
+//		activeIntakeLeft.set(speed);
+//		activeIntakeRight.set(speed);
 		activeIntake.set(speed);
 	}
 	
 	public void stopActiveIntake() {
+//		activeIntakeLeft.set(0);
+//		activeIntakeRight.set(0);
 		activeIntake.set(0);
 	}
 
