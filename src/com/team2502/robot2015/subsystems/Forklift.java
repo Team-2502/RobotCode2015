@@ -49,7 +49,7 @@ public class Forklift extends Subsystem {
 		forkliftWinch.set(0);
 	}
 
-	public void setState(boolean open) {
+	public void setActiveIntakeState(boolean open) {
 
 		if (!isLeftForced) {
 			setLeft(open);
@@ -164,6 +164,7 @@ public class Forklift extends Subsystem {
 	public void updateForkliftDashboard() {
 
 		SmartDashboard.putNumber("Forklift Voltage", getSensorVoltage());
+		SmartDashboard.putData("IR Sensor", sensor);
 		SmartDashboard.putNumber("Forklift Height", getHeight());
 		SmartDashboard.putNumber("Throttle", OI.getLiftStick().getThrottle());
 		SmartDashboard.putBoolean("Left Forklift Open", isOpenLeft());
