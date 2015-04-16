@@ -76,19 +76,19 @@ public class OI {
 		//forkliftDirection = new JoystickButton(liftStick, 3);
 		//forkliftDirection.whenPressed(new ToggleDirection());
 		
-		openForkliftButton = new JoystickButton(liftStick, 2);
+		openForkliftButton = new JoystickButton(liftStick, 3);
 		openForkliftButton.whenPressed(new ForkliftArmActuator());
 
 		binHolder = new JoystickButton(driveStick, 3);
 		binHolder.whenPressed(new BinHolder());
 		
-		forceLeft = new JoystickButton(liftStick, 4);
+/*		forceLeft = new JoystickButton(liftStick, 4);
 		forceLeft.whenPressed(new SetLeftForced(true));
 		forceLeft.whenReleased(new SetLeftForced(false));
 
 		forceRight = new JoystickButton(liftStick, 5);
 		forceRight.whenPressed(new SetRightForced(true));
-		forceRight.whenReleased(new SetRightForced(false));
+		forceRight.whenReleased(new SetRightForced(false));*/
 	}
 
 	public static Joystick getDriveStick() {
