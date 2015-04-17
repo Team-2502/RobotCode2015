@@ -32,6 +32,8 @@ public class DriveTrain extends Subsystem {
 	private double speedY = 0;
 	private double xCoord = 0;
 	private double yCoord = 0;
+	private double initialXAccel = 0;
+	private double initialYAccel = 0;
 	private double prevTime;
 
 	private BuiltInAccelerometer accel = new BuiltInAccelerometer();
@@ -45,7 +47,7 @@ public class DriveTrain extends Subsystem {
 //		rightBack = new CANTalon(RobotMap.RIGHT_BACK_DRIVE);
 		rightSlide = new CANTalon(RobotMap.RIGHT_SLIDE_DRIVE);
 		drive = new RobotDrive(leftFront, rightFront);
-		accel = new BuiltInAccelerometer();
+//		accel = new BuiltInAccelerometer();
 
 		leftFront.setPosition(0);
 //		leftBack.setPosition(0);
@@ -95,11 +97,14 @@ public class DriveTrain extends Subsystem {
 		
 		if (prevTime == 0) {
 			prevTime = System.currentTimeMillis();
+			initialXAccel = accel.getX();
+			initialYAccel = accel.getY();
 		}
 		
+		
 		double changedTime = (System.currentTimeMillis() - prevTime) / 1000;
-		speedX += accel.getX() * changedTime;
-		speedY += accel.getY() * changedTime;
+		speedX += (accel.getX() - initialXAccel) * changedTime;
+		speedY += (accel.getY() - initialYAccel) * changedTime;
 		xCoord += speedX * changedTime;
 		yCoord += speedY * changedTime;
 		prevTime = System.currentTimeMillis();
@@ -154,8 +159,8 @@ public class DriveTrain extends Subsystem {
 		
 		
 		SmartDashboard.putData("Accelerometer", accel);
-		SmartDashboard.putNumber("X", accel.getX());
-		SmartDashboard.putNumber("Y", accel.getY());
+		SmartDashboard.putNumber("X", accel.getX() - initialXAccel);
+		SmartDashboard.putNumber("Y", accel.getY() - initialYAccel);
 		SmartDashboard.putNumber("Z", accel.getZ());
 		
 		SmartDashboard.putNumber("X Coord", xCoord);
