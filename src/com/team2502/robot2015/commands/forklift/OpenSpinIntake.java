@@ -25,7 +25,8 @@ public class OpenSpinIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	fl.setActiveIntakeState(false);
+//    	fl.setActiveIntakeState(false);
+    	fl.setActiveIntakeState(!(fl.isOpenLeft() || fl.isOpenRight()));
     }
 
     // Make this return true when this Command no longer needs to run execute()

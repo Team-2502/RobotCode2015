@@ -6,6 +6,7 @@ import com.team2502.robot2015.subsystems.Forklift;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,6 +16,7 @@ public class MoveForklift extends Command {
 	private Forklift fl = Robot.forklift;
 	private boolean settingTargetHeight = true;
 	private double targetHeight;
+	private Preferences prefs;
 //	Preferences prefs;
 
 	public MoveForklift() {
@@ -52,8 +54,16 @@ public class MoveForklift extends Command {
 				////////////////////////////////////////////////////////////////////
 				//Change the 5.0 Value if you can't get data from smartdashbaord
 //				if (fl.getSensorVoltage() > prefs.getDouble("Forklift Voltage", 5.0) && fl.isEnable())
-					if (fl.getSensorVoltage() < .5 && fl.isEnable())
-					new OpenSpinIntake();
+				SmartDashboard.putString("Stuff", "SPAM");
+//					if (fl.getSensorVoltage() > .27 && fl.isEnable()){
+				if (fl.getSensorVoltage() > SmartDashboard.getNumber("Volts", .26) && fl.isEnable()){
+//					new OpenSpinIntake();
+//					new ToggleActiveIntakeArms();
+						fl.setActiveIntakeState(false);
+					SmartDashboard.putString("Stuff", "HI");
+					}
+					SmartDashboard.putBoolean("StuffOpen", fl.isEnable());
+					
 				
 //			}
 		} else {

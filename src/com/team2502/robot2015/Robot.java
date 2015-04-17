@@ -13,6 +13,7 @@ import com.team2502.robot2015.subsystems.ScorpionTail;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -58,6 +59,7 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
 		// autonomousCommand = new ExampleCommand();
 		// autonomousCommand = new RecycleBinPickup();
+		SmartDashboard.putNumber("Volts", .26);
 		autoChooser.addObject("Pickup and Move Backwards",
 				AutoModes.PICKUP_MOVE);
 		autoChooser.addObject("Move Backwards", AutoModes.MOVE);
