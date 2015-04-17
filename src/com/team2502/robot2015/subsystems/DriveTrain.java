@@ -91,16 +91,18 @@ public class DriveTrain extends Subsystem {
 	
 	private void adjustMovement() {
 		
+		if (Math.abs(OI.getDriveStick().getX()) < .05 && Math.abs(OI.getDriveStick().getY()) < .05) return;
+		
 		if (prevTime == 0) {
 			prevTime = System.currentTimeMillis();
 		}
 		
-		double changedTime = System.currentTimeMillis() - prevTime;
-		speedX += accel.getX();
-		speedY += accel.getY();
+		double changedTime = (System.currentTimeMillis() - prevTime) / 1000;
+		speedX += accel.getX() * changedTime;
+		speedY += accel.getY() * changedTime;
 		xCoord += speedX * changedTime;
 		yCoord += speedY * changedTime;
-		
+		prevTime = System.currentTimeMillis();
 	}
 
 	public void moveMainDrive(double speed) {
