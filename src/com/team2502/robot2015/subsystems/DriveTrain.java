@@ -27,6 +27,12 @@ public class DriveTrain extends Subsystem {
 	private final CANTalon rightFront;
 //	private final CANTalon rightBack;
 	private final CANTalon rightSlide;
+	
+	private double speedX = 0;
+	private double speedY = 0;
+	private double xCoord = 0;
+	private double yCoord = 0;
+	private double prevTime;
 
 	private BuiltInAccelerometer accel = new BuiltInAccelerometer();
 
@@ -80,6 +86,21 @@ public class DriveTrain extends Subsystem {
 		drive.arcadeDrive(OI.getDriveStick().getY(), OI.getDriveStick().getZ(), true);
 		leftSlide.set(-OI.getDriveStick().getX() * Math.abs(OI.getDriveStick().getX()));
 		rightSlide.set(-OI.getDriveStick().getX() * Math.abs(OI.getDriveStick().getX()));
+		adjustMovement();
+	}
+	
+	private void adjustMovement() {
+		
+		if (prevTime == 0) {
+			prevTime = System.currentTimeMillis();
+		}
+		
+		double changedTime = System.currentTimeMillis() - prevTime;
+		speedX += accel.getX();
+		speedY += accel.getY();
+		xCoord += speedX * changedTime;
+		yCoord += speedY * changedTime;
+		
 	}
 
 	public void moveMainDrive(double speed) {
@@ -135,6 +156,10 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("Y", accel.getY());
 		SmartDashboard.putNumber("Z", accel.getZ());
 		
+		SmartDashboard.putNumber("X Coord", xCoord);
+		SmartDashboard.putNumber("Y Coord", yCoord);
+		SmartDashboard.putNumber("X Speed", speedX);
+		SmartDashboard.putNumber("Y Speed", speedY);
 
 	}
 
