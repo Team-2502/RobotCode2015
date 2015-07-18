@@ -3,7 +3,6 @@ package com.team2502.robot2015.subsystems;
 import com.team2502.robot2015.OI;
 import com.team2502.robot2015.RobotMap;
 import com.team2502.robot2015.commands.drive.SlideDrive;
-import com.team2502.robot2015.commands.forklift.IntakeTest;
 import com.team2502.robot2015.commands.forklift.MoveForklift;
 
 import edu.wpi.first.wpilibj.AnalogInput;

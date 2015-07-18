@@ -103,6 +103,7 @@ public class DriveTrain extends Subsystem {
 		
 		
 		double changedTime = (System.currentTimeMillis() - prevTime) / 1000;
+		SmartDashboard.putNumber("Changed Time", changedTime);
 		speedX += (accel.getX() - initialXAccel) * changedTime;
 		speedY += (accel.getY() - initialYAccel) * changedTime;
 		xCoord += speedX * changedTime;
