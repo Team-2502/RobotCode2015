@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Forklift extends Subsystem {
 
 	private final CANTalon forkliftWinch = new CANTalon(RobotMap.FORKLIFT_WINCH);
+	private final CANTalon forkliftWinchTwo = new CANTalon(RobotMap.FORKLIFT_WINCH_TWO);
 	private final Talon activeIntake = new Talon(RobotMap.ACTIVE_INTAKE);
 //	private final CANTalon activeIntakeLeft = new CANTalon(RobotMap.ACTIVE_INTAKE_LEFT);
 //	private final CANTalon activeIntakeRight = new CANTalon(RobotMap.ACTIVE_INTAKE_RIGHT);
@@ -125,12 +126,14 @@ public class Forklift extends Subsystem {
 
 	public void move(double speed) {
 		forkliftWinch.set(speed);
+		forkliftWinchTwo.set(speed);
 	}
 
 	public void moveLift() {
 
-		forkliftWinch.set(OI.getLiftStick().getY() * forkliftDirection);
-
+		double speed = OI.getLiftStick().getY() * forkliftDirection;
+		forkliftWinch.set(speed);
+		forkliftWinchTwo.set(speed);
 	}
 
 	public double getHeight() {

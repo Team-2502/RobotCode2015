@@ -30,6 +30,8 @@ public class RobotMap {
 	public final static int SCORPION_WINCH = 8;
 	
 	public final static int FORKLIFT_WINCH = 7;
+	/*Change this to right input*/
+	public final static int FORKLIFT_WINCH_TWO = 8;
 	public final static int FORKLIFT_SOLENOID_LEFT = 0;
 	public final static int FORKLIFT_SOLENOID_RIGHT = 6;
 	public final static int FORKLIFT_SENSOR = 2;
